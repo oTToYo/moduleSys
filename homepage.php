@@ -2,18 +2,68 @@
 
 <?php
 session_start();
+include_once('connections/connDB.php');
 if(!isset($_SESSION["uname"])||$_SESSION["uname"] ="")
 {
-	if(isset($_POST["uid"])&&isset($_POST["pwd"]))
+	if(isset($_POST["acc"])&&isset($_POST["pwd"]))
 	{
 		$userid="";
 		$password="";
-		$userid=$_POST['uid'];
-		$password=$_POST['pwd'];
-		echo $userid;
+		//$userid=$_POST['acc'];
+		//$password=$_POST['pwd'];
+		
+			include_once('authSetting.php');
+			fputs($fp, "PASS $password\r\n");
+			$msg = fgets($fp,256);
+			//echo $msg;
+			if(substr($msg,0,2561)=='-')
+			{
+				//header("Location:homepage.php"); //帳密錯誤
+			}
 
-		include_once('connections/connDB.php');
-		$query = "select * from user where account = '$userid' and pwd = '$password'";
+			if(substr($msg,0,1)=='+')  
+			{
+				$query = "select * from user where account = '$userid'";
+				$result = mysql_query($query) or die(mysql_error());
+				$row_result = mysql_fetch_assoc($result);
+				
+				$totalRows = mysql_num_rows($result);
+				echo $totalRows;
+				if($totalRows>0)
+				{
+
+					$_SESSION['uname']= $row_result['account'];
+					$_SESSION['type']= $row_result['type'];
+					
+					header("Location:service.php");
+				
+				}
+				
+			}
+
+			//檢查資料庫是否有重複申請的帳號
+
+			
+			$queryDefault = "Select account,pwd,type from user";
+			$result = mysql_query($queryDefault)or die(mysql_error());
+
+			for($cnt = 0;$row_result = mysql_fetch_assoc($result);$cnt++)
+				{
+					$tmpAcc = $row_result['account'];
+					if($tmpAcc == $userid)
+					{
+						if($password ==$row_result['pwd'] )
+						{
+							$_SESSION['uname']= $row_result['account'];
+							$_SESSION['type']= $row_result['type'];
+							header("Location:service.php");
+						}
+						break;
+					}
+					if($cnt == mysql_num_rows($result))
+						header("Location:homepage.php");
+				}
+		/*$query = "select * from user where account = '$userid' and pwd = '$password'";
 		$result = mysql_query($query, $link_ID) or die(mysql_error());
 		$row_result = mysql_fetch_assoc($result);
 		
@@ -32,7 +82,7 @@ if(!isset($_SESSION["uname"])||$_SESSION["uname"] ="")
 		else
 		{
 			header("Location:homepage.php");
-		}
+		}*/
 	}
 }
 else
@@ -68,7 +118,7 @@ else
           <div class="field">
             <label>Username</label>
             <div class="ui left labeled icon input">
-              <input type="text" placeholder="Username" name="uid">
+              <input type="text" placeholder="Username" name="acc">
               <i class="user icon"></i>
               <div class="ui corner label">
                 <i class="asterisk icon"></i>

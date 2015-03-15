@@ -216,7 +216,7 @@
 	//auto conplete
 	$(".selectUsr").autocomplete("autotest.php", {matchContains: true});  
 	
-	//search 
+	//頁面上search 
 	
 	$("#pSearchBtn").on('click',function(){
 		
@@ -228,7 +228,8 @@
 		if(searchKey!="") //確定搜尋列不為空
 		{
 			$allObj.each(function( index ) {
-				$name = $(this).find("span > div");
+				$name = $(this).find(" .clickName");
+				//alert($name.text());
 				if($name.text() == searchKey)
 				{
 					$(this).show();
