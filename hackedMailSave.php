@@ -11,9 +11,9 @@
 	print_r($change);
 	
 	//echo $_POST['user'];
-	$user = "";
-	$if(!empty($_POST['modules']))
-		$user = $_POST['user'];
+	$user = $_POST['user'];
+	//$if(!empty($_POST['modules']))
+		//$user = json_decode($_POST['user']);
 	include_once('connections/connDB.php');
 	//add
 		foreach($add as $value)
@@ -25,7 +25,7 @@
 			$query = "INSERT INTO  netcompservice.hackedmail(date,account,type,ip,notes,checked)VALUES('$value[0]','$value[1]','$value[2]','$value[3]','$value[4]',$ch)";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			//record
-			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action)VALUES('$currentTime','$value[1]','$value[2]','$value[3]','new','$user')";
+			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value[1]','$value[2]','$value[3]','new','$user')";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			
 			
@@ -39,13 +39,13 @@
 			print_r($row_result);
 			$type=$row_result['type'];
 			$ip=$row_result['ip'];
-			echo($type);
+			//echo($type);
 			
 			$query = "DElETE FROM  netcompservice.hackedmail WHERE hackedmail.account='$value'";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			
 			//record
-			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value','$type','$ip','delete')";
+			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value','$type','$ip','delete','$usr')";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 		}
 		

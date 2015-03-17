@@ -271,27 +271,45 @@ echo $name;
 				  
 				  
 					//將moudule的名字抓出來並存到array
-					$query = "select * from module";
-					$result = mysql_query($query);
-				
-					//print_r($row_result);
-					$a = array();
-					while($row_result = mysql_fetch_assoc($result))
-					array_push($a,$row_result['name']);
-		
+					$all_moudule_name = array();
+					$get_all_ModuleName_Q = "SELECT moduleNo,name FROM  module";
+					$get_all_ModuleName_Q_result= mysql_query($get_all_ModuleName_Q)or die(mysql_error());
+					while($moduleName_row_result = mysql_fetch_assoc($get_all_ModuleName_Q_result))
+					{
+						$all_moudule_name[$moduleName_row_result['moduleNo']] = $moduleName_row_result['name'];
+						//array_push($all_moudule_name,$moduleName_row_result['name']);
+					}
+					//print_r($all_moudule_name);
+					
 					$query = "SELECT account,nickName,type,adM FROM  user";
 						$result = mysql_query($query)or die(mysql_error());
 						while($row_result = mysql_fetch_assoc($result))
 						{
+							$adM  = json_decode($row_result['adM']);
+							//print_r($adM);
+							
+							$moudleAdmStr = "";
+							
+							for($i=0;$i<count($adM);$i++)
+							{
+								$moudleAdmStr .= $i.".".$all_moudule_name[$adM[$i]]." ";
+							}
+							
+							
 							echo "<div class='ui fluid vertical menu'>
 									
 								  <div class='header item userItem '>
 								  <div class='field t' >
 					              <span class='h' name='account'><i class='user icon'></i><div  class='ui blue label '>帳號 : <span class='clickName'>".$row_result['account']."</span></div><div class='ui red label'>暱稱 : ".$row_result['nickName']."</div></span>
 								  <div class='ui teal label'><span name='group'> 群組 : ".$row_result['type']."</span></div>
-								  </div>
+									";
+								
+								echo "<div class='ui  label'><span name='group'> 管理模組 : ".$moudleAdmStr."</span></div>";	
 								  
-								  <div class='userList menu'>
+							echo"</div>
+								 ";
+								  
+							echo"	  <div class='userList menu'>
 									<div class='three column doubling ui grid'>
 									
 									</div>

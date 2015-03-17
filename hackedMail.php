@@ -250,7 +250,7 @@ echo $uname;
 					cache: false,
 					dataType: 'html',
 					type:'POST',
-					data: { change:JSON.stringify(changeArr) ,del:JSON.stringify(delArr),add: JSON.stringify(newArr),user:"<?php echo $uname?>"},
+					data: { change:JSON.stringify(changeArr) ,del:JSON.stringify(delArr),add: JSON.stringify(newArr),user:"<?php  echo $uname?>"},
 					error: function(xhr) 
 					{
 					   alert('Ajax request 發生錯誤');
