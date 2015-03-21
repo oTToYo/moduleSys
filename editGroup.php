@@ -1,12 +1,10 @@
 <?php 
 include_once('connections/connDB.php');
-	$typeName="";
-	$levelNum="";
-	$typeName=$_POST['typeName'];
 	
-	$moduleStr="[";
-	if(!empty($_POST['modules']))
+	
+	if(!empty($_POST['modules'])&&!empty($_POST['selected']))
 	{
+		$typeName = $_POST['selected'];
 		$modules=$_POST['modules'];
 		print_r($modules);
 		for($i=0;$i<count($modules);$i++)
@@ -18,6 +16,7 @@ include_once('connections/connDB.php');
 			{
 			$query_search_name = "Select * from module where moduleNo=$muduleNo";
 			$result = mysql_query($query_search_name)or die(mysql_error());
+
 				while($row_result = mysql_fetch_assoc($result)) //找到模組對應的名字
 					{
 						$serviceUsed = $row_result['service']."Used";
@@ -31,26 +30,18 @@ include_once('connections/connDB.php');
 							//print_r($_POST[$serviceUsed]);
 		
 						}
-						//對此模組的relation 新增一個group預設權限
+						//對此模組的relation 更新group預設權限
 						
-						$query_insert_relation = "INSERT INTO ".$row_result['service']."relation(groupName,defaultP)VALUES('$typeName','$default')";
+						$query_insert_relation = "update ".$row_result['service']."relation set defaultP = '$default' where  groupName = '$typeName' ";
 						echo $query_insert_relation;
 						mysql_query($query_insert_relation)or die(mysql_error());
 					}
 				
 			}
 			
-			
-			
-			$moduleStr =$moduleStr.$modules[$i];
-			if($i+1 !=count($modules) )
-			$moduleStr =$moduleStr.",";	
+		
 		}
 	}                                                                                                                                                                   
-	$moduleStr=$moduleStr."]";	
-	echo $moduleStr;
 	
-		$query = "INSERT INTO  netcompservice.priviledge_type(name,useM)VALUES('$typeName','$moduleStr')";
-		$result = mysql_query($query, $link_ID) or die(mysql_error());
 	header("Location: ./priviledgeManage.php");
 ?>
