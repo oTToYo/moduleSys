@@ -32,5 +32,5 @@
 			$query = "UPDATE netcompservice.user SET user.type='$type',actUseM='$actM' WHERE user.account='$account[0]'";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 		}
-		//header("Location: ./priviledgeManage.php");
+		header("Location: ./priviledgeManage.php");
 ?>
