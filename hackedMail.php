@@ -83,7 +83,7 @@ echo $uname;
 				 (month<10 ? '0' : '') + month + '-' + 
 				 (day<10 ? '0' : '') + day;
 			
-				var $tr = $("<tr/>");
+				var $tr = $("<tr>");
 				$tr.addClass("newAdd");
 				//$("tbody").prepend('<tr class=\'newAdd\'></tr>');
 				//$tr.prepend('<td>'+time+'</td>');
@@ -134,7 +134,7 @@ echo $uname;
 						$("#listCnt").html("");
 						$.each(response,function(key,val)
 						{
-							var $tr = $("<tr/>");
+							var $tr = $("<tr>");
 							
 							$.each(val,function(tdKey,tdVal)
 							{
@@ -294,7 +294,7 @@ echo $uname;
                 if (window.$currEditing)
                     finishEditing($currEditing);
                 var $cell = $(this);
-                var $inp = $("<input type='text' />");
+                var $inp = $("<input type='text' >");
                 $inp.val($cell.text());
                 $cell.addClass("cell-editor").html("").append($inp);
                 $inp[0].select();
@@ -402,7 +402,7 @@ echo $uname;
       <tbody id="listCnt">
         <?php
 			include_once('connections/connDB.php');
-			$query = "select date,account,type,ip,notes,checked from hackedMail";
+			$query = "select date,account,type,ip,notes,checked from hackedmail";
 			$result = mysql_query($query);
 			
 			$lvQuery = "select func from hackedmailuser where account = '$uname'";

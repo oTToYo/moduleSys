@@ -25,7 +25,7 @@ include_once('sessionCheck.php');
 			$query = "INSERT INTO  netcompservice.hackedmail(date,account,type,ip,notes,checked)VALUES('$value[0]','$value[1]','$value[2]','$value[3]','$value[4]',$ch)";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			//record
-			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value[1]','$value[2]','$value[3]','new','$user')";
+			$query = "INSERT INTO netcompservice.hackedmailrecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value[1]','$value[2]','$value[3]','new','$user')";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			
 			
