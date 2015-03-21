@@ -33,7 +33,7 @@ include_once('sessionCheck.php');
 	//delete
 		foreach($del as $value)
 		{
-			$query = "select type,ip from hackedMail where account='$value'";
+			$query = "select type,ip from hackedmail where account='$value'";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			$row_result = mysql_fetch_assoc($result);
 			print_r($row_result);
@@ -45,7 +45,7 @@ include_once('sessionCheck.php');
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			
 			//record
-			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value','$type','$ip','delete','$usr')";
+			$query = "INSERT INTO netcompservice.hackedmailrecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value','$type','$ip','delete','$usr')";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 		}
 		
@@ -63,7 +63,7 @@ include_once('sessionCheck.php');
 			$query = "UPDATE netcompservice.hackedmail SET date='$value[0]',account='$value[1]',type='$value[2]',ip='$value[3]',notes='$value[4]',checked=$ch WHERE hackedmail.account='$value[1]'";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 			//record
-			$query = "INSERT INTO netcompservice.hackedmailRecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value[1]','$value[2]','$value[3]','modify','$user')";
+			$query = "INSERT INTO netcompservice.hackedmailrecord(time,account,type,ip,action,modifier)VALUES('$currentTime','$value[1]','$value[2]','$value[3]','modify','$user')";
 			$result = mysql_query($query, $link_ID) or die(mysql_error());
 		}
 		

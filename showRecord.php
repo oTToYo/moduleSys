@@ -23,7 +23,7 @@ include_once('sessionCheck.php');
       <tbody id="">
 		 <?php
 			include_once('connections/connDB.php');
-			$query = "select time,account,type,ip,action,modifier from hackedMailRecord ";
+			$query = "select time,account,type,ip,action,modifier from hackedmailrecord ";
 			$result = mysql_query($query);
 			
 			
