@@ -138,7 +138,10 @@
 		$group = $(this).find(".menu > .item");
 		
 		$group.each(function(){
-		
+		$(this).find('input').each(function(){
+			
+			$(this).prop('checked', false);
+		})
 		//console.log($(this).attr("data-value"));
 		var check = $(this).attr("data-value");
 		//alert(check);
@@ -154,7 +157,8 @@
 			//alert("test"+$.inArray(0,selectM));
 			$eachM.each(function(){
 				//alert($(this));
-			$(this).prop('checked', false);
+			//$(this).prop('checked', false);
+			$(this).parent().siblings('.content').find('input').prop('checked',false);
 			var valID = $(this).attr("value");
 			//alert(valID);
 			
