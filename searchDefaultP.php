@@ -1,6 +1,6 @@
 <?php 
 include_once('connections/connDB.php');
-	
+	include_once('sessionCheck.php');
 	if(!empty($_POST['muduleNo'])&&!empty($_POST['groupName']))
 	{
 		$muduleNo=$_POST['muduleNo'];

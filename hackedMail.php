@@ -1,5 +1,5 @@
 ﻿<?php
-SESSION_START();
+include_once('sessionCheck.php');
 header("Content-Type:text/html; charset=utf-8");
 $uname = $_SESSION['uname'];
 echo $uname;

@@ -7,6 +7,7 @@
 		stD : start date
 		endDate : end date
 	*/
+	include_once('sessionCheck.php');
 	$query="";
 	if(!empty($_GET["type"]))
 	{	

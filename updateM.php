@@ -1,4 +1,5 @@
 ﻿<?php
+include_once('sessionCheck.php');
 	include_once('connections/connDB.php');
 				$query = "select * from module";
 				$result = mysql_query($query);

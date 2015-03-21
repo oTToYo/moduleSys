@@ -1,6 +1,6 @@
 <?php 
 include_once('connections/connDB.php');
-	
+	include_once('sessionCheck.php');
 	
 	if(!empty($_POST['modules'])&&!empty($_POST['selected']))
 	{

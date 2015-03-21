@@ -1,4 +1,5 @@
 ﻿<?php 
+include_once('sessionCheck.php');
 	$account = $_POST["acc"];
 	$user = $_POST['user'];
 		//echo $user;

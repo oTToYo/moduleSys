@@ -1,5 +1,5 @@
 ﻿<?php
-
+include_once('sessionCheck.php');
 ?>
 
 <html>

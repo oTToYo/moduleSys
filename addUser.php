@@ -1,4 +1,5 @@
 <?php
+include_once('sessionCheck.php');
 	header("Content-Type:text/html; charset=utf-8");
 	
 	//$account="";
@@ -57,5 +58,5 @@
 		//mysql_query($query)or die(mysql_error());
 		
 		
-		//header("Location: ./priviledgeManage.php");
+		header("Location: ./priviledgeManage.php");
 ?>

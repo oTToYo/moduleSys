@@ -1,4 +1,5 @@
-<?php 
+<?php
+include_once('sessionCheck.php');
 include_once('connections/connDB.php');
 	$typeName="";
 	$levelNum="";

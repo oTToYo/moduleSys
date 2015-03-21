@@ -1,4 +1,5 @@
 ﻿<?php 
+include_once('sessionCheck.php');
 	$searchName = $_POST["search"];
 	$numOfList = $_POST["num"];
 	$pageNum = $_POST["page"];

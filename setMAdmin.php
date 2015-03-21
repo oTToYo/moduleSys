@@ -1,5 +1,5 @@
 <?php 
-
+include_once('sessionCheck.php');
 	$userName="";
 	$levelNum="";
 	$userName=$_POST['userName'];
